@@ -1,14 +1,25 @@
-import { Controller, Post, Get, Body, Param, Delete, Put } from '@nestjs/common'
+import {
+  Controller,
+  Post,
+  Get,
+  Body,
+  Param,
+  Delete,
+  Put,
+  UseGuards,
+} from '@nestjs/common'
 import { OrganizationService } from './organization.service'
 import { OrganizationCreateDto, OrganizationUpdateDto } from './dto'
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger'
 import { OrganizationEntity } from './organization.entity'
+import { AuthGuard } from 'src/auth/auth.guard'
 
 @ApiTags('organization')
 @Controller('organization')
 export class OrganizationController {
   constructor(private readonly organizationService: OrganizationService) {}
 
+  @UseGuards(AuthGuard)
   @Get('/')
   @ApiOperation({ summary: 'List all organization' })
   @ApiResponse({
@@ -21,6 +32,7 @@ export class OrganizationController {
     return this.organizationService.list()
   }
 
+  @UseGuards(AuthGuard)
   @Post('/')
   @ApiOperation({ summary: 'Create new organization' })
   @ApiResponse({
@@ -35,6 +47,7 @@ export class OrganizationController {
     return this.organizationService.create(data)
   }
 
+  @UseGuards(AuthGuard)
   @Delete('/:id')
   @ApiOperation({ summary: 'Delete organization' })
   @ApiResponse({
@@ -48,6 +61,7 @@ export class OrganizationController {
     return this.organizationService.delete(organizationId)
   }
 
+  @UseGuards(AuthGuard)
   @Put('/:id')
   @ApiOperation({ summary: 'Update organization' })
   @ApiResponse({
