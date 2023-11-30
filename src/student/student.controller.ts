@@ -28,7 +28,7 @@ export class StudentController {
   @ApiOperation({ summary: 'List all organization students' })
   @ApiResponse({
     status: 200,
-    description: 'All organizations returned',
+    description: 'All organizations students returned',
     type: [StudentEntity],
     isArray: true,
   })
@@ -72,7 +72,7 @@ export class StudentController {
   @ApiOperation({ summary: 'Update student' })
   @ApiResponse({
     status: 200,
-    description: 'Organization deleted',
+    description: 'Student update',
     type: StudentEntity,
   })
   async update(
